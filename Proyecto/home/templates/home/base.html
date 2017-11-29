@@ -1,0 +1,77 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<link href="{% static 'bootstrap/css/bootstrap.min.css' %}"rel="stylesheet" media="screen">
+<link rel="stylesheet" href="{% static 'bootstrap/css/blog.css' %}">
+<script src="/static/bootstrap/js/jquery-1.12.2.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/bootstrap/js/jquery.js"></script>
+<link rel="stylesheet" href="/static/pure-release-0.6.0/pure-min.css">
+
+</head>
+<body>
+{% if user.is_authenticated %}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">TAREAS ITT</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a class="glyphicon glyphicon-home" href="{% url 'login' %}"> INICIO</a></li>
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> COMUNIDAD <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{% url 'community_list' %}">TODOS LOS USUARIOS</a></li>
+            <li><a href="{% url 'friend_list' %}">MIS AMIGOS</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span> PUBLICACIONES <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{% url 'report_publication' %}">TODAS LAS PUBLICACIONES</a></li>
+            <li><a href="{% url 'register_publication' %}">PUBLICAR ALGO NUEVO</a></li>
+          </ul>
+        </li>
+      </ul>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown">{{user.username}} <img src="{{ get_image_profile }}" width="30px" height="30px"  class="img-circle" ><span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="{% url 'perfil_view' %}">Perfil</a></li>
+          <li><a href="{% url 'logout' %}">Cerrar sesion</a></li>
+        </ul>
+    </li>
+    </ul>
+  </div>
+</nav>
+{% else %}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">TAREAS ITT</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a class="glyphicon glyphicon-home" href="{% url 'login' %}"> INICIO</a></li>
+      <li><a href="{% url 'signup' %}" class="glyphicon glyphicon-pencil"> REGISTRARSE</a></li>
+    </ul>
+  </div>
+</nav>
+{% endif %}
+<div class="bg">
+  <div class="jumbotron">
+    <div class="container">
+                <h1>Comunidad Universitaria de Tareas</h1>
+                <h2 style="color:#FAFAFA;">Tu principal fuente de tareas, investigaciones, reportes y proyectos</h2>
+      </div>
+   </div>
+</div>
+</body>
+</html>
+{% block content %}
+{% endblock %}
